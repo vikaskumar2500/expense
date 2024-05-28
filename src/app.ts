@@ -16,14 +16,14 @@ import path from "path";
 import helmet from "helmet";
 import morgan from "morgan";
 import fs from "fs";
-import https from "https";
+// import https from "https";
 
 dotenv.config();
 
 const app = express();
 
-const privateKey = fs.readFileSync("server.key");
-const certificate = fs.readFileSync("server.cert");
+// const privateKey = fs.readFileSync("server.key");
+// const certificate = fs.readFileSync("server.cert");
 
 app.use(cors());
 app.use(bodyParser.json());
