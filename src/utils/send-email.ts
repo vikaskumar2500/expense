@@ -23,7 +23,7 @@ export const sendEmailViaSMTP = async (
 
       html: `<div style={{display:"flex", alignItems:"center", flexDirection:"column", padding:"10px", gap:"5px"}}>
         <span>Your verification code:${otp} for expense tracker app </span>
-        <a href='http://localhost:3000/password/reset-password/${userId}'>
+        <a href='http://13.235.103.61:3000/password/reset-password.html'>
           Reset your password
         </a>
         <div>NOTE: Please do not share this otp with anyone!</div>

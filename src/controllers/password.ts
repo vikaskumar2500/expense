@@ -4,6 +4,7 @@ import { Users } from "../models/users";
 import { sendEmailViaSMTP } from "../utils/send-email";
 import { sequelize } from "../db";
 import { ForgotPasswords } from "../models/forgot-password";
+import { decodeToken } from "../utils/decode-token";
 
 export const postForgotPassword = async (req: Request, res: Response) => {
   const otp = Math.floor(111111 + Math.random() * 999999).toString();
@@ -32,14 +33,15 @@ export const postResetPassword = async (req: Request, res: Response) => {
   const t = await sequelize.transaction();
 
   try {
-    const { userId } = req.params;
+    const token = req.headers["authorization"];
+    const { id } = decodeToken(token);
     const { otp, newPassword } = req.body;
 
-    console.log(otp)
+    console.log(otp);
     // getting otp from forgot password table
     const forgotPassword = await ForgotPasswords.findOne<any>({
       where: {
-        userId,
+        userId: id,
         isActive: true,
         otp,
       },
@@ -51,7 +53,7 @@ export const postResetPassword = async (req: Request, res: Response) => {
     if (forgotPassword.otp != otp) throw new Error("OTP does not match");
 
     // get current user
-    const user = await Users.findByPk<any>(userId);
+    const user = await Users.findByPk<any>(id);
 
     // user does not found
     if (!user) throw new Error("User does not found!");
@@ -76,7 +78,7 @@ export const postResetPassword = async (req: Request, res: Response) => {
     await Users.update(
       { password: hashedPassword },
       {
-        where: { id: userId },
+        where: { id },
         transaction: t,
       }
     );
@@ -86,20 +88,9 @@ export const postResetPassword = async (req: Request, res: Response) => {
     );
 
     await t.commit();
-    res.render("password/toast", {
-      message: "Updated password!",
-    });
-    res.redirect(`/password/reset-password/${userId}`);
+    res.status(200).json({ message: "Password updated succesfully!" });
   } catch (e) {
     await t.rollback();
-    res.render("password/toast", {
-      message: e.message,
-    });
-    res.end();
+    res.status(500).json({ message: e.message });
   }
-};
-
-export const getResetPassword = (req: Request, res: Response) => {
-  const userId = req.params.userId;
-  res.render("password/reset-password", { userId });
 };

@@ -31,18 +31,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + "/views"));
+app.use(express.static(path.join(__dirname + "public")));
 
 app.use("/user", usersRouter);
 app.use("/expenses", expenseRouter);
 app.use("/premium", premiumRouter);
 app.use("/password", passwordRouter);
 
-app.use("/", (req, res) => {
-  res.send(`
-    <body>
-      <div>Home</div>
-    </body>
-  `);
+app.use((req, res) => {
+  console.log(req.url);
+  res.sendFile(path.join(__dirname + `/public/${req.url}`));
+});
+
+app.use((req, res) => {
+  // res.render()
 });
 
 const errorLogs = fs.createWriteStream(path.join(__dirname, "errors.log"), {
