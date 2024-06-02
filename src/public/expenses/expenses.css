@@ -1,0 +1,97 @@
+#rzp-button1 {
+  width: 90%;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+}
+
+#rzp-button1,
+#leaderboard,
+#downloadexpense {
+  background-color: #007bff;
+}
+
+#rzp-button1,
+#leaderboard,
+#downloadexpense,
+#pagination select {
+  cursor: pointer;
+}
+
+#premium {
+  margin-top: 10px;
+}
+
+#error {
+  color: red;
+}
+
+.grid-container {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  #listdiv,
+  #show-leaderboard {
+    width: 100%;
+    min-height: 30rem;
+  }
+
+  #downloaded-files-container {
+    width: 100%;
+    height: 20rem;
+  }
+}
+
+#listdiv,
+#show-leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+}
+
+#listdiv {
+  height: 30rem;
+}
+
+#downloaded-files-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  width: 50rem;
+  height: 40rem;
+}
+
+#downloaded-files {
+  max-height: 20rem;
+  overflow-y: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#expense-list-container {
+  max-height: 50rem;
+  overflow-y: auto;
+}
+
+#pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

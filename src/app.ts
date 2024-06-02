@@ -43,16 +43,17 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname + `/public/${req.url}`));
 });
 
-app.use((req, res) => {
-  // res.render()
-});
-
 const errorLogs = fs.createWriteStream(path.join(__dirname, "errors.log"), {
   flags: "a",
 });
 
 app.use(helmet());
 app.use(morgan("combined", { stream: errorLogs }));
+
+app.use((req, res) => {
+  // res.render()
+  res.end("HOME");
+});
 
 Users.hasMany(Expenses);
 Expenses.belongsTo(Users, {

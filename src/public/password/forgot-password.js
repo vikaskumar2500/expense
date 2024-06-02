@@ -12,7 +12,7 @@ const forgotPassword = async (event) => {
 
     button.textContent = "Sending...";
     const res = await axios.post(
-      "http://13.235.103.61:3000/password/forgot-password",
+      "http://localhost:3000/password/forgot-password",
       {
         email,
         otp,

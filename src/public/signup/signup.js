@@ -6,7 +6,7 @@ const signup = async (event) => {
   console.log("name", name, email, password);
 
   try {
-    const res = await axios.post("http://13.235.103.61:3000/user/signup", {
+    const res = await axios.post("http://localhost:3000/user/signup", {
       name,
       email,
       password,

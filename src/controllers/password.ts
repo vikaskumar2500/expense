@@ -18,7 +18,6 @@ export const postForgotPassword = async (req: Request, res: Response) => {
     await ForgotPasswords.create({ otp, userId: user.id }, { transaction: t });
     const smtpRes = await sendEmailViaSMTP(email, otp, user.id);
 
-    console.log("smtpRes", smtpRes);
     if (smtpRes.status !== 200) throw new Error(smtpRes.error);
 
     await t.commit();
@@ -37,7 +36,6 @@ export const postResetPassword = async (req: Request, res: Response) => {
     const { id } = decodeToken(token);
     const { otp, newPassword } = req.body;
 
-    console.log(otp);
     // getting otp from forgot password table
     const forgotPassword = await ForgotPasswords.findOne<any>({
       where: {
@@ -46,7 +44,6 @@ export const postResetPassword = async (req: Request, res: Response) => {
         otp,
       },
     });
-    console.log(forgotPassword);
     if (!forgotPassword) throw new Error("Something went wrong!");
 
     // check for the password match

@@ -3,19 +3,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Expenses = void 0;
+exports.Orders = void 0;
 const sequelize_1 = __importDefault(require("sequelize"));
 const db_1 = require("../db");
-exports.Expenses = db_1.sequelize.define("expenses", {
+exports.Orders = db_1.sequelize.define("orders", {
     id: {
         type: sequelize_1.default.STRING,
         allowNull: false,
-        unique: true,
         primaryKey: true,
         defaultValue: sequelize_1.default.UUIDV4
     },
-    amount: { type: sequelize_1.default.INTEGER, allowNull: false },
-    description: { type: sequelize_1.default.TEXT, allowNull: false },
-    category: { type: sequelize_1.default.STRING, allowNull: false },
+    paymentId: sequelize_1.default.STRING,
+    orderId: { type: sequelize_1.default.STRING, allowNull: false },
+    status: { type: sequelize_1.default.STRING, allowNull: false },
 });
-//# sourceMappingURL=expenses.js.map
+//# sourceMappingURL=orders.js.map

@@ -6,44 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Signup | Expense</title>
   <script src="./signup.js" defer></script>
-  <link rel="stylesheet" href="../global.css"/>
+  <link rel="stylesheet" href="../global.css" />
 </head>
 
 <body>
-  <main style="
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-items: center;
-        width: 100%;
-      ">
-    <form id="form" onsubmit="signup(event)" style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-items: center;
-          gap: 10px;
-          width: 25rem;
-        ">
-      <div style="display: flex; flex-direction: column; gap: 5px; width: 100%">
+  <main>
+    <form id="form" onsubmit="signup(event)">
+      <h2>Signup Form</h2>
+      <div class="inputContainer">
         <label for="name"> Name </label>
-        <input type="text" required style="padding: 5px; padding-inline: 12px; border-radius: 6px" name="name" id="name" />
+        <input type="text" required name="name" id="name" />
       </div>
-      <div style="display: flex; flex-direction: column; gap: 5px; width: 100%">
+      <div class="inputContainer">
         <label for="email">Email</label>
-        <input type="email" required style="padding: 5px; padding-inline: 12px; border-radius: 6px" name="email" id="email" />
+        <input type="email" required name="email" id="email" />
       </div>
-      <div style="display: flex; flex-direction: column; gap: 5px; width: 100%">
-        <label for="password">password</label>
-        <input type="password" required style="padding: 5px; padding-inline: 12px; border-radius: 6px" name="password" id="password" />
+      <div class="inputContainer">
+        <label for="password">Password</label>
+        <input type="password" required name="password" id="password" />
       </div>
-      <button type="submit" style="
-            width: 20%;
-            padding: 5px;
-            padding-inline: 12px;
-            border-radius: 6px;
-            margin-top: 10px;
-          ">
+      <button type="submit" id="submit" >
         Submit
       </button>
       <div id="error" style="color: red"></div>

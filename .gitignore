@@ -40,3 +40,7 @@ next-env.d.ts
 
 server.cert
 server.key
+
+.git
+
+node_modules/

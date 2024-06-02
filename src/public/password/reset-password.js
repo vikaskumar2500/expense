@@ -9,7 +9,7 @@ const resetPassword = async (e) => {
 
     const token = localStorage.getItem("jwt_token");
     await axios.post(
-      "http://13.235.103.61:3000/password/reset-password",
+      "http://localhost:3000/password/reset-password",
       { otp, newPassword },
       {
         headers: { Authorization: token },

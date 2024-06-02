@@ -62,7 +62,7 @@ export const getS3BucketData = async (req: Request, res: Response) => {
       Bucket: process.env.AWS_S3_BUCKET_NAME,
       Prefix: `${user.id}`,
     });
-    return res.status(200).json(bucketData);
+    return res.status(200).json({ s3Data: bucketData });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -80,12 +80,14 @@ export const postaddExpense = async (req: Request, res: Response) => {
       { total_expenses: updatedUser.total_expenses + Number(amount) },
       { where: { id: user.id }, transaction: t }
     );
-    await Expenses.create(
+    const addedExpense: any = await Expenses.create(
       { amount, description, category, userId: user.id },
       { transaction: t }
     );
     await t.commit();
-    return res.status(200).json({ message: "Expenses created!" });
+    return res
+      .status(200)
+      .json({ message: "Expenses created!", expenseId: addedExpense.id });
   } catch (e) {
     await t.rollback();
     return res.status(500).json({ message: e.message });
